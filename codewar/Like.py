@@ -8,3 +8,19 @@ It must return the display text as shown in the examples:
 ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
 Note: For 4 or more names, the number in "and 2 others" simply increases."""
 
+
+def Like(names: 'array'):
+    if names == []:
+        print("no one likes this")
+    elif len(names) == 1:
+        print(f"{names[0]} likes this")
+    elif len(names) == 2:
+        print(f"{names[0]} and {names[1]} likes this")
+    elif len(names) == 3:
+        print(f"{names[0]}, {names[1]} likes this")
+    elif len(names) > 3:
+        print(f"{names[0]}, {names[1]} and {len(names) - 2} likes this")
+
+
+Like(['as', 'fd', 'ef', 'gr','fds'])
+# Like(['q'])
