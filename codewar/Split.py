@@ -3,20 +3,25 @@ If the string contains an odd number of characters then it should replace the mi
 second character of the final pair with an underscore ('_').
 """
 
-text = "asdfadsf"
+s = "asdfads"
 
 
-def solution(text):
-    if len(text) % 2 != 0:
-        text += '_'
-    text_list = list(text)
-    new_text = []
-    for i in range(0, len(text_list), 2):
-        new_text.append(text_list[i] + text_list[i + 1])
+def solution(s):
+    if len(s) % 2 != 0:
+        s += '_'
+    new_s = []
+    for i in range(0, len(s), 2):
+        new_s.append(s[i] + s[i + 1])
         i += 2
-    return new_text
+    return new_s
+# def solution(s):
+#     if len(s) == 0:
+#         return []
+#     elif len(s) == 1:
+#         return [s + "_"]
+#     else:
+#         return [s[:2]] + solution(s[2:])
 
+print(s)
 
-print(text)
-
-print(solution(text))
+print(solution(s))
