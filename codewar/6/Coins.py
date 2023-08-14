@@ -18,7 +18,7 @@ def coins(coin1, coin2):
     print(max(a))
     if len(b)==0:
         return -1
-    elif len(b)>100:
+    elif len(b)>len(a)//2:
         return -1
     else:
         f= max(b)
