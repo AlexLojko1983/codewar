@@ -1,5 +1,5 @@
 def count_primes_less_than(N: int) -> int:
-    if N < 10000000:
+    if N <= 10000000:
         primes = [True] * (N + 1)
         primes[0] = primes[1] = False
 
@@ -9,29 +9,24 @@ def count_primes_less_than(N: int) -> int:
                 for i in range(p * p, N + 1, p):
                     primes[i] = False
             p += 1
-        prime_numbers = []
-        for i in range(2, N + 1):
-            if primes[i]:
-                prime_numbers.append(i)
-
-        return len(prime_numbers)
+        return primes.count(True)
     else:
-        primes = [True] * (N + 1 )
+        primes = [True] * (N + 1 - 10000000)
+        print(len(primes))
         p = 2
-        while p * p <= N:
+        while p * p <= N - 10000000 + 1:
             if primes[p]:
-                for i in range(10000000, N + 1):
-                    if i % p == 0 and primes[i]:
-                        primes[i] = False
-            p += 1
-        prime_numbers = []
-        for i in range(10000000, N + 1):
-            if primes[i]:
-                prime_numbers.append(i)
-        return len(prime_numbers)+664579
+                for j in range(len(primes)):
+                    for i in range(10000001, N + 1):
+                        if i % p == 0:
+                            primes[j] = False
+                        j += 1
+                    p += 1
+
+        return primes.count(True) + 664579
 
 
-print(count_primes_less_than(10000009))
+print(count_primes_less_than(10000010))
 
 # import math
 #
