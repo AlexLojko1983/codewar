@@ -4,10 +4,11 @@
 # • If the element is a bool, simply reverse it. True becomes False and False becomes True
 # • Reverse the list
 def change_list(arr):
-    if type(arr) is int: return arr**2
-    if type(arr) is bool: return not arr
-    if type(arr) is str: return arr + ''.join(arr[::-1])
-    if type(arr) is list: return arr.reverse()
+    for i in range(len(arr)):
+        if type(arr[i]) is int: arr[i] = arr[i] ** 2
+        elif type(arr[i]) is bool: arr[i] =  not arr[i]
+        elif type(arr[i]) is str: arr[i] =  arr[i] + ''.join(arr[i][::-1])
+        i=i+1
+    return arr
 
-
-print(change_list([5,10,11]))
+print(change_list([5, 'fds', True,[1, 2, 3]]))
