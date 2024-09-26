@@ -10,3 +10,6 @@ def is_isogram(string: str):
 
 
 print(is_isogram("Dermatoglyphics"))
+
+''''def is_isogram(string):
+    return len(string) == len(set(string.lower()))'''
