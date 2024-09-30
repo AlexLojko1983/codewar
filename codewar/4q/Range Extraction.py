@@ -10,30 +10,32 @@ formatted string in the range format.
 
 # solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20])
 # returns "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
-args = [-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20]
+args = [-6,-3,-2,-1,0,1,3,4,5,7,8,9,10,11,14,15,17,18,19,20]
 
 
 def solution(args):
-    strn_end = str
-    strn = str(args[0]) + ' |'
-    for i in range(1, len(args) - 1):
+    strn_end = ''
+    strn = ''
+    for i in range(0, len(args) - 1):
         if args[i] == args[i + 1] - 1:
             strn += str(args[i]) + '|'
-            if i+2 == len(args):
-                strn += str(args[i+1])
+            if i + 2 == len(args):
+                strn += str(args[i + 1])
         else:
             strn += str(args[i]) + ','
     strn = strn.split(',')
 
     for i in strn:
-        if i.count('|') > 0:
+        if i.count('|') == 1:
+            m = i.split('|')
+            strn_end += m[0] + ',' + m[1] + ','
+        elif i.count('|') > 1:
             k = i.split('|')
-            print(k)
-            strn_end 
-
-        # else:
-        #     strn_end += i
-    return strn
+            strn_end += k[0] + '-' + k[-1] + ','
+        else:
+            strn_end += i + ','
+    print(type(strn_end))
+    return strn_end[:-1]
 
 
 print(solution(args))
