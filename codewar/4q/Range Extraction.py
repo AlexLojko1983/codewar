@@ -10,7 +10,7 @@ formatted string in the range format.
 
 # solution([-10, -9, -8, -6, -3, -2, -1, 0, 1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20])
 # returns "-10--8,-6,-3-1,3-5,7-11,14,15,17-20"
-args = [-6,-3,-2,-1,0,1,3,4,5,7,8,9,10,11,14,15,17,18,19,20]
+args = [-75, -72, -71, -70, -67, -64, -63, -62, -60, -58, -57, -56, -54, -52]
 
 
 def solution(args):
@@ -23,6 +23,8 @@ def solution(args):
                 strn += str(args[i + 1])
         else:
             strn += str(args[i]) + ','
+            if i + 2 == len(args):
+                strn += str(args[i + 1])
     strn = strn.split(',')
 
     for i in strn:
@@ -36,6 +38,18 @@ def solution(args):
             strn_end += i + ','
     print(type(strn_end))
     return strn_end[:-1]
+
+'''
+def solution(arr):
+    ranges = []
+    a = b = arr[0]
+    for n in arr[1:] + [None]:
+        if n != b+1:
+            ranges.append(str(a) if a == b else "{}{}{}".format(a, "," if a+1 == b else "-", b))
+            a = n
+        b = n
+    return ",".join(ranges)
+'''
 
 
 print(solution(args))
