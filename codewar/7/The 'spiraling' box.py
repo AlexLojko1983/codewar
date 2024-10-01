@@ -7,14 +7,30 @@ the following way:
 And so on ...
 '''
 
+
 def create_box(m, n):  ## m and n positive integers
-    lst = [[0 for _ in range(n)] for _ in range(m)]
-    for i in range(m):
-        for j in range(n):
-            if i == 0 or j == 0 or i == m-1 or j == n-1:
-                 lst[i][j] = 1
-            else:
-                lst[i][j] = 2
+    lst = [[0 for _ in range(m)] for _ in range(n)]
+    k = 1
+    left = 0
+    right = n - 1
+    top = 0
+    bottom = m - 1
+    while left <= right and top <= bottom:
+        for i in range(left, right + 1):
+            for j in range(top, bottom + 1):
+                if i == top or j == left or i == right or j == bottom:
+                    lst[i][j] = k
+        k += 1
+        left += 1
+        top += 1
+        right -= 1
+        bottom -= 1
     return lst
 
-print (create_box(5,8))
+
+print(create_box(5, 8))
+
+'''
+def create_box(m, n):  ## m and n positive integers
+    return [[min([x+1, y+1, m-x, n-y]) for x in range(m)] for y in range(n)]
+'''
