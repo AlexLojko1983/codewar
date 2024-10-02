@@ -8,10 +8,26 @@ This kata generalizes Last digit of a large number; you may find useful to solve
 '''
 
 
+# def last_digit(lst):
+#     if len(lst) == 0: return 1
+#     elif len(lst) == 1: return lst[0]
+#
+#     elif len(lst) == 2:
+#         for i in range(len(lst)):
+#             return pow(lst[0],lst[1],10)
+#     return pow(lst[0], pow(lst[1], lst[2]), 10)
+
+
 def last_digit(lst):
     if len(lst) == 0: return 1
-    if len(lst) == 1: return lst[0]
-    return pow(lst[0], pow(lst[1], lst[2]), 10)
+    elif len(lst) == 1: return lst[0]
+    new_value = pow(lst[-2], lst[-1], 10)
+    if len(lst) == 2 and lst[1] == 1:
+        return lst[0]
+    elif len(lst) == 2 and lst[1]!=1:
+        lst = lst[:-2] + [new_value]
+        return last_digit(lst)
+    lst = lst[:-2] + [new_value]
+    return last_digit(lst)
 
-
-print(last_digit([937640, 767456, 981242]))
+print(last_digit([499942, 898102, 846073]))
