@@ -9,25 +9,64 @@ This kata generalizes Last digit of a large number; you may find useful to solve
 
 
 # def last_digit(lst):
-#     if len(lst) == 0: return 1
-#     elif len(lst) == 1: return lst[0]
+#     if not lst:
+#         return 1
+#     if len(lst) == 1:
+#         return lst[0] % 10
 #
-#     elif len(lst) == 2:
-#         for i in range(len(lst)):
-#             return pow(lst[0],lst[1],10)
-#     return pow(lst[0], pow(lst[1], lst[2]), 10)
-
+#     # Удаляем все нули перед последним элементом
+#     while len(lst) > 1 and lst[-1] == 0:
+#         lst.pop()
+#
+#     # Если после удаления нулей остался только один элемент
+#     if len(lst) == 1:
+#         return lst[0] % 10
+#
+#     # Обработка случая, когда последний элемент списка равен 0
+#     if lst[-1] == 0:
+#         lst[-1] = 4  # 0^0 считается как 1, но для корректного вычисления используем 4
+#
+#         # Вычисляем эффективный показатель степени вручную
+#         exp = 1
+#         for i in range(len(lst) - 1, 0, -1):
+#             if lst[i] == 0:
+#                 exp = 1
+#             else:
+#                 exp = (lst[i - 1] % 4 + 4) if exp == 0 else (lst[i - 1] % 4 + 4) ** exp % 4
+#
+#         base = lst[0] % 10
+#         result = 1
+#         for _ in range(exp):
+#             result = (result * base) % 10
+#
+#         return result
 
 def last_digit(lst):
-    if len(lst) == 0: return 1
-    elif len(lst) == 1: return lst[0]
-    new_value = pow(lst[-2], lst[-1], 10)
-    if len(lst) == 2 and lst[1] == 1:
-        return lst[0]
-    elif len(lst) == 2 and lst[1]!=1:
-        lst = lst[:-2] + [new_value]
-        return last_digit(lst)
-    lst = lst[:-2] + [new_value]
-    return last_digit(lst)
+    if not lst:
+        return 1
+    if len(lst) == 1:
+        return lst[0] % 10
 
-print(last_digit([499942, 898102, 846073]))
+    def effective_exponent(exp):
+        if exp == 0:
+            return 1
+        return exp % 4 if exp % 4 != 0 else 4
+
+        # Обработка случая, когда последний элемент списка равен 0
+    if lst[-1] == 0:
+        lst[-1] = 4  # 0^0 считается как 1, но для корректного вычисления используем 4
+
+        # Вычисляем эффективный показатель степени
+
+    exp = lst[-1] % 4 + 4 if lst[-1] > 4 else lst[-1]
+    for num in reversed(lst[1:-1]):
+        if exp == 1:
+            exp = num % 4 + 4 if num > 4 else num
+        else:
+            exp = effective_exponent(num ** exp)
+    if exp == 0:
+        return 1
+    return (lst[0] ** effective_exponent(exp)) % 10
+
+
+print(last_digit([106413, 947766, 539413, 457946]))
