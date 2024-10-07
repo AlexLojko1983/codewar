@@ -21,31 +21,30 @@ it adds 1 to every digit of that number. If the digit is a 9, we replace it with
 #     return (s)
 
 
-
-def digitwise_addition(n, k):
-    import sys
-    sys.set_int_max_str_digits(10 ** 6)
-
-    def add_one_to_digits(x):
-        result = 0
-        multiplier = 1
-        while x > 0:
-            digit = x % 10
-            x //= 10
-            if digit == 9:
-                result += 10 * multiplier
-                multiplier *= 100
-            else:
-                result += (digit + 1) * multiplier
-                multiplier *= 10
-        return result
-
-    for _ in range(k):
-        n = add_one_to_digits(n)
-
-    return len(str(n))
+# def digitwise_addition(n, k):
 #
+#     def add_one_to_digits(x):
+#         result = 0
+#         multiplier = 1
+#         while x > 0:
+#             digit = x % 10
+#             x //= 10
+#             if digit == 9:
+#                 result += 10 * multiplier
+#                 multiplier *= 100
+#             else:
+#                 result += (digit + 1) * multiplier
+#                 multiplier *= 10
+#         return result
 #
+#     for _ in range(k):
+#         n = add_one_to_digits(n)
+#
+#     return len(str(n))
+
+
+
+
 print(digitwise_addition(143948553, 16))
 
 # n=143948553 and k=16; 35 should equal 32.
