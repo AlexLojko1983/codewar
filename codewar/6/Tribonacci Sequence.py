@@ -38,4 +38,11 @@ def tribonacci(signature, n):
         result.append(result[-3] + result[-2] + result[-1])
     return result
 
+'''
+def tribonacci(signature, n):
+  res = signature[:n]
+  for i in range(n - 3): res.append(sum(res[-3:]))
+  return res
+'''
+
 print(tribonacci([1,1,1], 10))
