@@ -21,3 +21,8 @@ def order(sentence):
 
 sentence = "is2 Thi1s T4est 3a"
 print(order(sentence))
+
+'''
+def order(sentence):
+  return " ".join(sorted(sentence.split(), key=min))
+'''
