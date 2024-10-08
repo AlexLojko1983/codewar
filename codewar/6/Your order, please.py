@@ -6,6 +6,18 @@ If the input string is empty, return an empty string. The words in the input
 String will only contain valid consecutive numbers.
 '''
 
+
 def order(sentence):
-  # code here
-  return
+    if len(sentence) == 0:
+        return ''
+    result = [[] for _ in range(len(sentence.split(' ')))]
+    sentence = sentence.split(' ')
+    for i in range(len(sentence)):
+        for j in sentence[i]:
+            if j.isdigit():
+                result[int(j)-1] = sentence[i]
+    return ' '.join(result)
+
+
+sentence = "is2 Thi1s T4est 3a"
+print(order(sentence))
