@@ -17,10 +17,10 @@ def find_outlier(integers):
         else:
             count_1 += 1
             value_1 = i
+    if count_2 < 2:
+        return value_2
+    return value_1
 
-    
-    return dict
 
-
-integers = [2, 4, 6, 8, 10, 3]
+integers = [2, 4, 0, 100, 4, 11, 2602, 36]
 print(find_outlier(integers))
