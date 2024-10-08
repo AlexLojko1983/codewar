@@ -24,3 +24,10 @@ def find_outlier(integers):
 
 integers = [2, 4, 0, 100, 4, 11, 2602, 36]
 print(find_outlier(integers))
+
+'''
+def find_outlier(int):
+    odds = [x for x in int if x%2!=0]
+    evens= [x for x in int if x%2==0]
+    return odds[0] if len(odds)<len(evens) else evens[0]
+'''
