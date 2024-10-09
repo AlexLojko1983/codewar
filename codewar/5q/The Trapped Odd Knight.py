@@ -45,10 +45,36 @@ def get_knight_moves(x, y, n, m):
     ]
 
 
+def generate_spiral(limit):
+    spiral = {}
+    x, y = 0, 0
+    dx, dy = 0, -1
+    for i in range(limit ** 2):
+        if (-limit // 2 < x <= limit // 2) and (-limit // 2 < y <= limit // 2):
+            spiral[(x, y)] = i
+        if (x == y) or (x < 0 and x == -y) or (x > 0 and x == 1 - y):
+            dx, dy = -dy, dx
+        x, y = x + dx, y + dy
+    return spiral
+
+
+def get_knight_moves(x, y, n, m):
+    return [
+        (x + n, y + m),
+        (x + n, y - m),
+        (x - n, y + m),
+        (x - n, y - m),
+        (x + m, y + n),
+        (x + m, y - n),
+        (x - m, y + n),
+        (x - m, y - n)
+    ]
+
+
 def knight_tour(n, m, limit):
     spiral = generate_spiral(limit)
-    visited = set()
-    path = []
+    visited = {(0, 0)}
+    path = [((0, 0), 0)]
     x, y = 0, 0
 
     while len(path) < limit:
@@ -60,12 +86,12 @@ def knight_tour(n, m, limit):
         visited.add(move)
         path.append((move, spiral[move]))
         x, y = move
-
     return path
 
 
-# Параметры: n = 1, m = 2, размер спирали = 100
-path = knight_tour(1, 2, 10000)
+    # Параметры: n = 1, m = 2, размер спирали = 100
+path = knight_tour(1, 2, 4000)
 
 for step in path:
     print(f"Клетка: {step[0]}, Значение: {step[1]}")
+print(path[-1][-1])
