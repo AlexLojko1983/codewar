@@ -19,17 +19,19 @@ You will always have 0 < n < m.
 '''
 
 
-def generate_spiral(limit):
-    spiral = {}
+def generate_spiral():
     x, y = 0, 0
     dx, dy = 0, -1
-    for i in range(limit ** 2):
-        if (-limit // 2 < x <= limit // 2) and (-limit // 2 < y <= limit // 2):
-            spiral[(x, y)] = i
+    visited = {}
+    i = 0
+    while True:
+        if (x, y) not in visited:
+            visited[(x, y)] = i
+            yield (x, y), i
+            i += 1
         if (x == y) or (x < 0 and x == -y) or (x > 0 and x == 1 - y):
             dx, dy = -dy, dx
         x, y = x + dx, y + dy
-    return spiral
 
 
 def get_knight_moves(x, y, n, m):
@@ -45,53 +47,40 @@ def get_knight_moves(x, y, n, m):
     ]
 
 
-def generate_spiral(limit):
-    spiral = {}
-    x, y = 0, 0
-    dx, dy = 0, -1
-    for i in range(limit ** 2):
-        if (-limit // 2 < x <= limit // 2) and (-limit // 2 < y <= limit // 2):
-            spiral[(x, y)] = i
-        if (x == y) or (x < 0 and x == -y) or (x > 0 and x == 1 - y):
-            dx, dy = -dy, dx
-        x, y = x + dx, y + dy
-    return spiral
-
-
-def get_knight_moves(x, y, n, m):
-    return [
-        (x + n, y + m),
-        (x + n, y - m),
-        (x - n, y + m),
-        (x - n, y - m),
-        (x + m, y + n),
-        (x + m, y - n),
-        (x - m, y + n),
-        (x - m, y - n)
-    ]
-
-
-def knight_tour(n, m, limit):
-    spiral = generate_spiral(limit)
+def knight_tour(n, m):
+    spiral_gen = generate_spiral()
+    spiral_map = {}
     visited = {(0, 0)}
     path = [((0, 0), 0)]
     x, y = 0, 0
 
-    while len(path) < limit:
+    while True:
         moves = get_knight_moves(x, y, n, m)
-        moves = [move for move in moves if move in spiral and move not in visited]
-        if not moves:
+        possible_moves = []
+
+        for move in moves:
+            if move not in visited:
+                if move not in spiral_map:
+                    coord, value = next(spiral_gen)
+                    spiral_map[coord] = value
+                possible_moves.append(move)
+
+        if not possible_moves:
             break
-        move = min(moves, key=lambda move: spiral[move])
+
+        move = min(possible_moves, key=lambda move: spiral_map[move])
         visited.add(move)
-        path.append((move, spiral[move]))
+        path.append((move, spiral_map[move]))
         x, y = move
+
     return path
 
 
-    # Параметры: n = 1, m = 2, размер спирали = 100
-path = knight_tour(1, 2, 4000)
+# Параметры: n = 1, m = 2
+path = knight_tour(1, 2)
 
 for step in path:
     print(f"Клетка: {step[0]}, Значение: {step[1]}")
-print(path[-1][-1])
+
+# Последняя посещенная ячейка
+print(f"Последняя посещенная ячейка: {path[-1][0]}, Значение: {path[-1][1]}")
