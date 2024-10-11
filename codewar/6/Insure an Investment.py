@@ -18,6 +18,24 @@ Given S_0, T, u and p, calculate the value of the insurance; that is, the expect
 The number of weeks T is always an integer between 1 and 52 * 5 = 260, inclusive. Remember,
 the simulation is discrete in time, with the stock price changing each week.
 '''
+import numpy as np
 
 def insurance_value(S_0, T, u, p):
-    return 0.0  # the best friend
+    d = 1 / u
+    compen = []
+    for i in range(10000):
+        S = S_0
+        for j in range(T):
+            if np.random.rand() < p:
+                S *= u
+            else:
+                S *= d
+        if S_0 > S:
+            com = S_0 - S
+        else:
+            com = 0
+        compen.append(round(com,4))
+    return round(np.mean(compen),4)
+
+
+print(insurance_value(100, 52, 1.02, 0.495))
