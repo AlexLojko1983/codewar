@@ -21,20 +21,20 @@ the simulation is discrete in time, with the stock price changing each week.
 import numpy as np
 
 def insurance_value(S_0, T, u, p):
-    d = 1 / u
+    d = round(1 / u, 6)
     compen = []
     for i in range(10000):
         S = S_0
         for j in range(T):
             if np.random.rand() < p:
-                S *= u
+                S = round(S*u,20)
             else:
-                S *= d
+                S = round(S*d,20)
         if S_0 > S:
             com = S_0 - S
         else:
             com = 0
-        compen.append(round(com,4))
+        compen.append(com)
     return round(np.mean(compen),4)
 
 
