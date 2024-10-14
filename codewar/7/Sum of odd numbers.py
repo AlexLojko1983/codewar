@@ -12,3 +12,8 @@ def row_sum_odd_numbers(n):
 
 
 print(row_sum_odd_numbers(13))
+'''
+def row_sum_odd_numbers(n):
+    #your code here
+    return n ** 3
+'''
