@@ -4,5 +4,15 @@ For example if the input number is 2, and the input list is [1,2,3,1,2,1,2,3], y
 With list [20,37,20,21] and number 1, the result would be [20,37,21].
 '''
 
-def delete_nth(order,max_e):
-    pass
+
+def delete_nth(order, max_e):
+    order_dict = {i: 0 for i in set(order)}
+    result = []
+    for i in order:
+        if order_dict[i] < max_e:
+            result.append(i)
+            order_dict[i] += 1
+    return result
+
+
+print(delete_nth([1, 1, 3, 3, 7, 2, 2, 2, 2], 3))
