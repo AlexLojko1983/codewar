@@ -17,3 +17,8 @@ def duplicate_count(text):
 
 
 print(duplicate_count('fgsafhgh465'))
+
+'''
+def duplicate_count(s):
+  return len([c for c in set(s.lower()) if s.lower().count(c)>1])
+'''
