@@ -13,16 +13,15 @@ def dir_reduc(arr):
     n = 1
     while n == 1 and len(arr) > 1:
         n = 0
-        for i, j in enumerate(arr):
-            if (j == 'NORTH' and arr[i + 1] == 'SOUTH'
-                    or j == 'SOUTH' and arr[i + 1] == 'NORTH'
-                    or j == 'WEST' and arr[i + 1] == 'EAST'
-                    or j == 'EAST' and arr[i + 1] == 'WEST'):
-                arr.remove(arr[i + 1])
-                arr.remove(arr[i])
+        for i in range(len(arr)-1):
+            if (arr[i] == 'NORTH' and arr[i + 1] == 'SOUTH'
+                    or arr[i] == 'SOUTH' and arr[i + 1] == 'NORTH'
+                    or arr[i] == 'WEST' and arr[i + 1] == 'EAST'
+                    or arr[i] == 'EAST' and arr[i + 1] == 'WEST'):
+                del arr[i:i+2]
                 n = 1
                 break
     return arr
 
 
-print(dir_reduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
+print(dir_reduc(["NORTH", "EAST", "NORTH", "EAST", "WEST", "WEST", "EAST", "EAST", "WEST", "SOUTH"]))
