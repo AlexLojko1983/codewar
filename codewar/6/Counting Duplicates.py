@@ -9,8 +9,11 @@ Example
 "aabbcde" -> 2 # 'a' and 'b'
 '''
 
-def duplicate_count(text):
-    dict_text = {i:text.count(i) for i in text}
-    return dict_text
 
-print(duplicate_count('fgsafhgh'))
+def duplicate_count(text):
+    dict_text = {i: text.lower().count(i) for i in text.lower()}
+    count = sum([1 for i in dict_text.values() if i > 1])
+    return count
+
+
+print(duplicate_count('fgsafhgh465'))
