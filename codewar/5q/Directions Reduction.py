@@ -10,4 +10,19 @@ See more examples in "Sample Tests:"
 '''
 
 def dir_reduc(arr):
-    pass
+    n = 1
+    while n == 1 and len(arr) > 1:
+        n = 0
+        for i, j in enumerate(arr):
+            if (j == 'NORTH' and arr[i + 1] == 'SOUTH'
+                    or j == 'SOUTH' and arr[i + 1] == 'NORTH'
+                    or j == 'WEST' and arr[i + 1] == 'EAST'
+                    or j == 'EAST' and arr[i + 1] == 'WEST'):
+                arr.remove(arr[i + 1])
+                arr.remove(arr[i])
+                n = 1
+                break
+    return arr
+
+
+print(dir_reduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]))
