@@ -11,8 +11,11 @@ Examples:
 
 def solution(s):
     if len(s) % 2 != 0: s = s + '_'
-    s= s[::2]
-    return s
+    result = s.split()
+    for i in range(len(s)):
+        if i%2 == 0:
+            result.insert(i,' ')
+    return result
 
 
-print(solution('abcdef'))
+print(solution('abcdefj'))
