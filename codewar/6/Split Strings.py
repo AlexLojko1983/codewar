@@ -8,5 +8,11 @@ Examples:
 * 'abcdef' => ['ab', 'cd', 'ef']
 '''
 
+
 def solution(s):
-    pass
+    if len(s) % 2 != 0: s = s + '_'
+    s= s[::2]
+    return s
+
+
+print(solution('abcdef'))
