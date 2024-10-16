@@ -6,7 +6,7 @@ You need to return the highest scoring word as a string.
 If two words score the same, return the word that appears earliest in the original string.
 All letters will be lowercase and all inputs will be valid.
 '''
-a = 'dsfds df'
+a = 'aa b'
 
 
 def high(x):
@@ -14,10 +14,13 @@ def high(x):
     for i in x.split(' '):
         key = 0
         for j in i:
-            key += ord(j)
-        dict_x[key] = i
+            key += (ord(j)-96)
+        if key not in dict_x.keys():
+            dict_x[key] = i
     print(dict_x)
     return dict_x[max(dict_x.keys())]
 
 
 print(high(a))
+
+print(ord('b'))
