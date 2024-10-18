@@ -5,5 +5,13 @@ Spaces will be included only when more than one word is present.
 '''
 
 def spin_words(sentence):
-    # Your code goes here
-    return None
+    result = []
+    for word in sentence.split(' '):
+        if len(word) >= 5:
+            word = word[::-1]
+        result.append(word)
+    return ' '.join(result)
+
+
+sentence = "Hey fellow warriors"
+print(spin_words(sentence))
