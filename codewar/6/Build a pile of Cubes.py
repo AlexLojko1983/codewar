@@ -14,4 +14,12 @@ findNb(91716553919377) --> -1
 '''
 
 def find_nb(m):
-    pass
+    result = 0
+    n = 1
+    while m > result:
+        result = result + n**3
+        n+1
+        if result == m: return result
+        return -1
+
+print(find_nb(1071225))
