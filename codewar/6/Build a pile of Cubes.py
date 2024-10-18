@@ -13,13 +13,15 @@ findNb(1071225) --> 45
 findNb(91716553919377) --> -1
 '''
 
+
 def find_nb(m):
     result = 0
     n = 1
     while m > result:
-        result = result + n**3
-        n+1
-        if result == m: return result
-        return -1
+        result = result + n ** 3
+        if result == m: return n
+        n += 1
+    return -1
 
-print(find_nb(1071225))
+
+print(find_nb(10712251))
