@@ -7,5 +7,7 @@ def create_phone_number(n):
 list_1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
 print(create_phone_number(list_1))
 
-# def create_phone_number(n):
-# 	return "({}{}{}) {}{}{}-{}{}{}{}".format(*n)
+'''
+def create_phone_number(n):
+	return "({}{}{}) {}{}{}-{}{}{}{}".format(*n)
+'''
