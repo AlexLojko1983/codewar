@@ -51,7 +51,14 @@ class Normal():
     def __repr__(self):
         return f'Normal({self.c})'
 
-class Or(RegExp): pass
+class Or(RegExp):
+    def __init__(self, left, right):
+        self.left = left
+        self.right = right
+
+    def __repr__(self):
+        return f'Or({repr({self.left})}, {repr({self.right})})'
+
 class Str():
     def __init__(self,RegExp):
         self.RegExp = RegExp
