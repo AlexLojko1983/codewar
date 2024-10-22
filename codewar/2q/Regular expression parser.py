@@ -1,15 +1,15 @@
 '''
-Your task is to implement a simple regular expression parser. We will have a parser that outputs the following AST of a regular expression:
+Your task is to implement a simple regular expression parser. We will have a parser that outputs the following
+AST of a regular expression:
 
 Normal(c)           # ^ A character (string) that is not in "()*|."
 Any()               # ^ Any character
 ZeroOrMore(regexp)  # ^ Zero or more occurances of the same regexp
 Or(regexp, regexp)  # ^ A choice between 2 regexps
 Str([regexps])      # ^ A sequence of regexps.
-As with the usual regular expressions, Any is denoted by the '.' character, ZeroOrMore is denoted by a subsequent '*' and Or is denoted by '|'. Brackets, ( and ), are allowed to group a sequence of regular expressions into the Str object.
-
+As with the usual regular expressions, Any is denoted by the '.' character, ZeroOrMore is denoted by a subsequent '*'
+and Or is denoted by '|'. Brackets, ( and ), are allowed to group a sequence of regular expressions into the Str object.
 Or is not associative, so "a|(a|a)" and "(a|a)|a" are both valid regular expressions, whereas "a|a|a" is not.
-
 Operator precedences from highest to lowest are: *, sequencing and |. Therefore the followings hold:
 
 "ab*"     -> Str([Normal ('a'), ZeroOrMore(Normal('b'))])
@@ -27,10 +27,7 @@ Some examples:
 The followings are invalid regexps and the parser should return Nothing in Haskell / 0 in C or C++ / null in JavaScript or C# / None in Python or Rust / new Void() in Java/Void() in Kotlin:
 
 "", ")(", "*", "a(", "()", "a**", etc.
-
 Feel free to use any parser combinator libraries available on codewars, or implement the parser "from scratch".
-
-
 '''
 
 # from preloaded import Any, Normal, Or, Str, ZeroOrMore
@@ -45,7 +42,11 @@ class RegExp:
         return f"{self.__class__.__name__}({args})"
     def __eq__(self, other):
         return type(self) is type(other) and self.args == other.args
-class Any(RegExp): pass
+class Any(RegExp):
+    def __str__(self,arg:str):
+        if arg == '.':
+            return 'Any()'
+        pass
 class Normal(RegExp):
     pass
 class Or(RegExp): pass
@@ -57,3 +58,6 @@ class ZeroOrMore(RegExp): pass
 
 def parse_regexp(indata):
     return Str([Normal('H'), Normal('e'), Normal('l'), Normal('l'), Normal('o')])
+
+s = 'ghskjlh'
+print(list(s))
