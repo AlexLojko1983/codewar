@@ -52,8 +52,18 @@ class Normal():
         return f'Normal({self.c})'
 
 class Or(RegExp): pass
-class Str(RegExp): pass
-class ZeroOrMore(RegExp): pass
+class Str():
+    def __init__(self,RegExp):
+        self.RegExp = RegExp
+
+    def __repr__(self):
+        return f'Str({repr({self.RegExp})})'
+class ZeroOrMore():
+    def __int__(self,RegExp):
+        self.RegExp = RegExp
+
+    def __repr__(self):
+        return f'ZeroOrMore({repr({self.RegExp})})'
 
 # Your task is to build an AST using those nodes.
 # See sample tests or test output for examples of usage.
