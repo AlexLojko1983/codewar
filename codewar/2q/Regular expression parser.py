@@ -42,13 +42,15 @@ class RegExp:
         return f"{self.__class__.__name__}({args})"
     def __eq__(self, other):
         return type(self) is type(other) and self.args == other.args
-class Any(RegExp):
-    def __str__(self,arg:str):
-        if arg == '.':
-            return 'Any()'
-        pass
-class Normal(RegExp):
-    pass
+class Any():
+    def __repr__(self):
+        return 'Any()'
+class Normal():
+    def __init__(self, c):
+        self.c = c
+    def __repr__(self):
+        return f'Normal({self.c})'
+
 class Or(RegExp): pass
 class Str(RegExp): pass
 class ZeroOrMore(RegExp): pass
