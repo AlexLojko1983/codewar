@@ -108,16 +108,18 @@ def parse_regexp(regexp:str):
             elif s[i] == '*':
                 result[-1] = ZeroOrMore(result[-1])
             elif s[i] == '|':
-                left = Str(result)
+                left = Str(result) if len(result)>1 else result[0]
                 right = parse(s[i+1:])
                 return Or(left,right)
             else:
                 result.append(Normal(s[i]))
             i += 1
-        return Str(result)
+        if len(result)>1:
+            return Str(result)
+        return result[0]
 
     return parse(regexp)
 
 
-regexp = '.*(sk)'
+regexp = '.k|l'
 print(parse_regexp(regexp))
