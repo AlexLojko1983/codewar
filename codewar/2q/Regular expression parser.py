@@ -29,54 +29,95 @@ The followings are invalid regexps and the parser should return Nothing in Haske
 "", ")(", "*", "a(", "()", "a**", etc.
 Feel free to use any parser combinator libraries available on codewars, or implement the parser "from scratch".
 '''
+from django.db.models.expressions import result
+
 
 # from preloaded import Any, Normal, Or, Str, ZeroOrMore
 
 # preloaded defines the following:
 
-class RegExp:
-    def __init__(self, *args):
-        self.args = args
-    def __repr__(self):
-        args = ", ".join(map(repr, self.args))
-        return f"{self.__class__.__name__}({args})"
-    def __eq__(self, other):
-        return type(self) is type(other) and self.args == other.args
-class Any():
+# class RegExp:
+#     def __init__(self, *args):
+#         self.args = args
+#
+#     def __repr__(self):
+#         args = ", ".join(map(repr, self.args))
+#         return f"{self.__class__.__name__}({args})"
+#
+#     def __eq__(self, other):
+#         return type(self) is type(other) and self.args == other.args
+
+
+class Any:
     def __repr__(self):
         return 'Any()'
-class Normal():
+
+
+class Normal:
     def __init__(self, c):
         self.c = c
+
     def __repr__(self):
         return f'Normal({self.c})'
 
-class Or(RegExp):
+
+class Or:
     def __init__(self, left, right):
         self.left = left
         self.right = right
 
     def __repr__(self):
-        return f'Or({repr({self.left})}, {repr({self.right})})'
+        return f'Or({repr(self.left)}, {repr(self.right)})'
 
-class Str():
-    def __init__(self,RegExp):
+
+class Str:
+    def __init__(self, RegExp):
         self.RegExp = RegExp
 
     def __repr__(self):
-        return f'Str({repr({self.RegExp})})'
-class ZeroOrMore():
-    def __int__(self,RegExp):
+        return f'Str({repr(self.RegExp)})'
+
+
+class ZeroOrMore:
+    def __init__(self, RegExp):
         self.RegExp = RegExp
 
     def __repr__(self):
-        return f'ZeroOrMore({repr({self.RegExp})})'
+        return f'ZeroOrMore({repr(self.RegExp)})'
 
-# Your task is to build an AST using those nodes.
-# See sample tests or test output for examples of usage.
 
-def parse_regexp(indata):
-    return Str([Normal('H'), Normal('e'), Normal('l'), Normal('l'), Normal('o')])
+def parse_regexp(regexp:str):
+    def parse(s:str):
+        result = []
+        count = 0
+        i = 0
+        while i < len(s):
+            if s[i] == '(':
+                count +=1
+                for j in range(i+1, len(s)):
+                    if s[j] == '(':
+                        count += 1
+                    elif s[j] == ')':
+                        count -=1
+                    if count ==0:
+                        result.append(parse(s[i+1:j]))
+                        i=j
+                        break
+            elif s[i] == '.':
+                result.append(Any())
+            elif s[i] == '*':
+                result[-1] = ZeroOrMore(result[-1])
+            elif s[i] == '|':
+                left = Str(result)
+                right = parse(s[i+1:])
+                return Or(left,right)
+            else:
+                result.append(Normal(s[i]))
+            i += 1
+        return Str(result)
 
-s = 'ghskjlh'
-print(list(s))
+    return parse(regexp)
+
+
+regexp = '.*(sk)'
+print(parse_regexp(regexp))
