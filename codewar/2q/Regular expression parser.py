@@ -50,7 +50,7 @@ from django.db.models.expressions import result
 
 class Any:
     def __repr__(self):
-        return 'Any()'
+        return f"{self.__class__.__name__}()"
 
 
 class Normal:
@@ -121,5 +121,5 @@ def parse_regexp(regexp:str):
     return parse(regexp)
 
 
-regexp = '.k|l'
+regexp = '.'
 print(parse_regexp(regexp))
