@@ -58,7 +58,7 @@ class Normal:
         self.c = c
 
     def __repr__(self):
-        return f'Normal({self.c})'
+        return f"Normal('{self.c}')"
 
 
 class Or:
@@ -121,5 +121,5 @@ def parse_regexp(regexp:str):
     return parse(regexp)
 
 
-regexp = '.'
+regexp = '.ds'
 print(parse_regexp(regexp))
